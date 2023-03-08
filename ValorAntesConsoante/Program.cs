@@ -1,26 +1,38 @@
-﻿string texto;
-char x;
+﻿string original, resultante;
 string vogal = "aeiouAEIOU";
 string consoante = "bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWYZ";
 
 Console.WriteLine("Digite o texto que sera usado: ");
-texto = Console.ReadLine();
-Console.WriteLine("Digite o caracter que sera usado: ");
-x = char.Parse(Console.ReadLine());
+original = Console.ReadLine();
 
+//Console.WriteLine("Digite o caracter que sera usado: ");
+//x = char.Parse(Console.ReadLine());
 
-for (int i = 0; i < texto.Length; i++)
+resultante = InsereCaracter(original);
+Console.WriteLine(resultante);
+
+string InsereCaracter(string original)
 {
-    if (vogal.Contains(texto[i]))
+    char[] aux = new char[original.Length*2];
+    string alterada = "";
+    for (int i = 0, j=0; i < original.Length; i++)
     {
-        Console.Write(texto[i]);
+        if ((original[i] != 'a') && (original[i] != 'e') &&(original[i] != 'i') && (original[i] != 'o') && (original[i] != 'u'))
+        {
+            aux[j+1] = original[i];
+            aux[j] = '.';
+            j = j +2;
+        }
+        else
+        {
+            aux[j] = original[i];
+            j++;
+        }
     }
-    else if (consoante.Contains(texto[i]))
+    for (int i = 0; i < aux.Length; i++)
     {
-        Console.Write(x.ToString() + texto[i].ToString());
+        alterada += aux[i];
     }
-    else {
-        Console.Write(texto[i]);
-    }
+    return alterada;
 }
 
